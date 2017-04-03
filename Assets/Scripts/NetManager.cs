@@ -6,10 +6,13 @@ using UnityStandardAssets.CrossPlatformInput;
 public class NetManager : MonoBehaviour
 {
     public GameObject headPrefab;
+    public GameObject leftHandPrefab;
+    public GameObject rightHandPrefab;
+
 
     public virtual void Start()
     {
-        PhotonNetwork.ConnectUsingSettings("1 ." + SceneManagerHelper.ActiveSceneBuildIndex);
+        PhotonNetwork.ConnectUsingSettings("1.0");
     }
 
     public virtual void OnConnectedToMaster()
@@ -40,5 +43,9 @@ public class NetManager : MonoBehaviour
         Debug.Log("OnJoinedRoom() called by PUN");
         PhotonNetwork.Instantiate(headPrefab.name, ViveManager.Instance.head.transform.position,
             ViveManager.Instance.head.transform.rotation, 0);
+        PhotonNetwork.Instantiate(rightHandPrefab.name, ViveManager.Instance.leftHand.transform.position,
+            ViveManager.Instance.leftHand.transform.rotation, 0);
+        PhotonNetwork.Instantiate(rightHandPrefab.name, ViveManager.Instance.rightHand.transform.position,
+            ViveManager.Instance.rightHand.transform.rotation, 0);
     }
 }
